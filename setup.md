@@ -24,13 +24,18 @@ You probably have an existing version of git on your machine, but
 
     $ brew install git
 
-will install a more recent one.
+will install a more recent one. Then follow along with Github's ["set up git" instructions](https://help.github.com/articles/set-up-git/). (I actually prefer the SSH setup over HTTPS, but either is fine.)
 
 **You're ready if**
 
     $ git --version
 
-returns something >= 2.2.
+returns something >= 2.2 and
+
+    $ git config --global user.name
+    $ git config --global user.email
+
+are both set.
 
 ## Rbenv & Ruby
 
