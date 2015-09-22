@@ -10,21 +10,12 @@ class Game
   end
 
   def won?
-    if @guessed_correct_answer == true
-      true
-    else
-      false
-    end
+    @guessed_correct_answer
   end
 
   def over?
-    if @guessed_correct_answer
-      true
-    elsif @guesses_left == 0
-      true
-    else
-      false
-    end
+    # && ~ and ... || ~ or
+    @guessed_correct_answer || @guesses_left == 0
   end
 
   def check_guess guessed_number
