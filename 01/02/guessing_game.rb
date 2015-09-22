@@ -17,8 +17,10 @@ class Game
     if guessed_number == @answer
       puts "Guessed correctly!"
       @guessed_correct_answer = true
+    elsif guessed_number > @answer
+      puts "Your guess was high"
     else
-      # ??
+      puts "Your guess was low"
     end
   end
 end
