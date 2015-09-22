@@ -2,8 +2,13 @@ require 'pry'
 
 class Game
   def initialize
-    @answer = rand(1 .. 10)
+    @max = 10 # <- one source of truth for the max
+    @answer = rand(1 .. @max)
     @guesses_left = 5
+  end
+
+  def max
+    @max
   end
 
   # attr_reader :guesses_left
@@ -37,7 +42,7 @@ end
 
 
 g = Game.new
-puts "Guess a random number between 1 and 50"
+puts "Guess a random number between 1 and #{g.max}"
 
 until g.over?
   puts "You have #{g.guesses_left} guesses left"
