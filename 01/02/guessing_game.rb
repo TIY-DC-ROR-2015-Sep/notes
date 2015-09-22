@@ -1,19 +1,20 @@
 require 'pry'
 
 class Game
+  attr_reader :max, :guesses_left
+
   def initialize
     @max = 10 # <- one source of truth for the max
     @answer = rand(1 .. @max)
     @guesses_left = 5
   end
 
-  def max
-    @max
-  end
-
-  # attr_reader :guesses_left
-  def guesses_left
-    @guesses_left
+  def won?
+    if @guessed_correct_answer == true
+      true
+    else
+      false
+    end
   end
 
   def over?
@@ -41,6 +42,7 @@ class Game
 end
 
 
+
 g = Game.new
 puts "Guess a random number between 1 and #{g.max}"
 
@@ -49,4 +51,10 @@ until g.over?
   puts "What is your guess?"
   guess = gets.chomp.to_i
   g.check_guess guess
+end
+
+if g.won?
+  puts "You won"
+else
+  puts "You lost"
 end
