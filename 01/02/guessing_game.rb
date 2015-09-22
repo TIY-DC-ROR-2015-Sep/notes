@@ -1,4 +1,5 @@
 require 'pry'
+require 'minitest/autorun'
 
 class Game
   attr_reader :max, :guesses_left
@@ -13,9 +14,13 @@ class Game
     @guessed_correct_answer
   end
 
+  def lost?
+    @guesses_left <= 0
+  end
+
   def over?
     # && ~ and ... || ~ or
-    @guessed_correct_answer || @guesses_left == 0
+    won? || lost?
   end
 
   def check_guess guessed_number
@@ -29,6 +34,14 @@ class Game
       puts "Your guess was low"
       @guesses_left = @guesses_left - 1
     end
+  end
+end
+
+class GameTest < Minitest::Test
+  def test_starts_right
+    g = Game.new
+    assert_equal 10, g.max
+    assert_equal 5, g.guesses_left
   end
 end
 
