@@ -45,6 +45,16 @@ class Frankenclass
       end
       [ evens, odds ]
     end
+
+  def all_are_big numbers
+    result = true
+    numbers.each do |i|
+      if i < 50
+        result = false
+      end
+    end
+    result
+  end
 end
 
 class ArrayTests < Minitest::Test
@@ -70,4 +80,9 @@ class ArrayTests < Minitest::Test
     assert_equal [ [2,4,6], [1,3,5] ], frank.partition_evens(nums)
   end
 
+  def test_can_check_all
+    frank = Frankenclass.new
+    assert frank.all_are_big([500, 100, 333])
+    refute frank.all_are_big([500, 49, 2245, 92498234])
+  end
 end
