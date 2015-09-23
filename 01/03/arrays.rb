@@ -23,6 +23,16 @@ class Frankenclass
     end
     result
   end
+
+  def take_evens all_numbers
+    result = []
+    all_numbers.each do |x|
+      if x.even?
+        result.push x
+      end
+    end
+    result
+  end
 end
 
 class ArrayTests < Minitest::Test
@@ -34,5 +44,11 @@ class ArrayTests < Minitest::Test
   def test_can_double_numbers
     frank = Frankenclass.new
     assert_equal [10,-4,14], frank.double([5,-2,7])
+  end
+
+  def test_can_select_numbers
+    frank = Frankenclass.new
+    nums = (1..10).to_a
+    assert_equal [2,4,6,8,10], frank.take_evens(nums)
   end
 end
