@@ -35,6 +35,15 @@ class Frankenclass
   def any_are_big ns
     ns.any? { |num| num >= 50 }
   end
+
+  def string_adder start
+    a = start.split
+    num = 0
+    a.each do |snum|
+      num = num + snum.to_i
+    end
+    num
+  end
 end
 
 class ArrayTests < Minitest::Test
@@ -72,5 +81,9 @@ class ArrayTests < Minitest::Test
     assert frank.any_are_big([1,2,3,4,5,100_000_000])
     assert frank.any_are_big([500, 49, 2245, 92498234])
     refute frank.any_are_big((1..49).to_a)
+  end
+
+  def test_can_add_stringified_list
+    assert_equal 42, frank.string_adder("20 5 15 2")
   end
 end
