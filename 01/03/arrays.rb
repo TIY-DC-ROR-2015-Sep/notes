@@ -12,63 +12,28 @@ class Frankenclass
   end
 
   def add(numbers)
-    sum = 0
-    # numbers.each { |number| sum = sum + number }
-    numbers.each do |number|
-      # sum = sum + number
-      sum += number
-    end
-    # return sum
-    sum
+    numbers.reduce :+
   end
 
   def double(numbers)
-    result = []
-    numbers.each do |n|
-      result.push(n * 2)
-    end
-    result
+    numbers.map { |n| n * 2 }
   end
 
   def take_evens all_numbers
-    result = []
-    all_numbers.each do |x|
-      if x.even?
-        result.push x
-      end
-    end
-    result
+    all_numbers.select { |x| x.even? }
   end
 
   def partition_evens all_numbers
-      evens, odds = [], []
-      all_numbers.each do |x|
-        if x.even?
-          evens.push x
-        else
-          odds.push x
-        end
-      end
-      [ evens, odds ]
-    end
+    all_numbers.partition { |x| x.even? }
+  end
 
   def all_are_big numbers
     @counter = @counter + 1
-    numbers.each do |i|
-      if i < 50
-        return false
-      end
-    end
-    true
+    numbers.all? { |i| i >= 50 }
   end
 
   def any_are_big ns
-    ns.each do |num|
-      if num > 50
-        return true
-      end
-    end
-    false
+    ns.any? { |num| num >= 50 }
   end
 end
 
