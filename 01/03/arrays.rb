@@ -37,12 +37,7 @@ class Frankenclass
   end
 
   def string_adder start
-    a = start.split
-    num = 0
-    a.each do |snum|
-      num = num + snum.to_i
-    end
-    num
+    start.split.map { |word| word.to_i }.reduce :+
   end
 end
 
