@@ -47,13 +47,12 @@ class Frankenclass
     end
 
   def all_are_big numbers
-    result = true
     numbers.each do |i|
       if i < 50
-        result = false
+        return false
       end
     end
-    result
+    true
   end
 end
 
