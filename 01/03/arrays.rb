@@ -33,6 +33,18 @@ class Frankenclass
     end
     result
   end
+
+  def partition_evens all_numbers
+      evens, odds = [], []
+      all_numbers.each do |x|
+        if x.even?
+          evens.push x
+        else
+          odds.push x
+        end
+      end
+      [ evens, odds ]
+    end
 end
 
 class ArrayTests < Minitest::Test
@@ -51,4 +63,11 @@ class ArrayTests < Minitest::Test
     nums = (1..10).to_a
     assert_equal [2,4,6,8,10], frank.take_evens(nums)
   end
+
+  def test_can_partition_numbers
+    frank = Frankenclass.new
+    nums = (1..6).to_a
+    assert_equal [ [2,4,6], [1,3,5] ], frank.partition_evens(nums)
+  end
+
 end
