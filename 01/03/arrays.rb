@@ -54,6 +54,15 @@ class Frankenclass
     end
     true
   end
+
+  def any_are_big ns
+    ns.each do |num|
+      if num > 50
+        return true
+      end
+    end
+    false
+  end
 end
 
 class ArrayTests < Minitest::Test
@@ -83,5 +92,13 @@ class ArrayTests < Minitest::Test
     frank = Frankenclass.new
     assert frank.all_are_big([500, 100, 333])
     refute frank.all_are_big([500, 49, 2245, 92498234])
+  end
+
+  def test_can_check_any
+    frank = Frankenclass.new
+    assert frank.any_are_big([500, 100, 333])
+    assert frank.any_are_big([1,2,3,4,5,100_000_000])
+    assert frank.any_are_big([500, 49, 2245, 92498234])
+    refute frank.any_are_big((1..49).to_a)
   end
 end
