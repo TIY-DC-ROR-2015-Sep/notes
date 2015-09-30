@@ -1,3 +1,4 @@
+require 'date'
 require 'pry'
 require 'json'
 
@@ -13,13 +14,40 @@ class TodoManager
   end
 
   def show_list
-    # Do stuff to show list
     list.each do |todo|
-      if todo["done"]
-        puts "X #{todo['description']}"
-      else
-        puts "- #{todo['description']}"
-      end
+      puts format_todo_item(todo)
+    end
+  end
+
+  def format_todo_item item
+    bullet_icon = if item["done"]
+      "X"
+    elsif item["due_at"] && Date.today > Date.parse(item["due_at"]) # past_due
+      "!"
+    else
+      "-"
+    end
+    description = item["description"]
+    due_label = if item["due_at"]
+      "(#{item['due_at']})"
+    else
+      ""
+    end
+
+    "#{bullet_icon} #{description} #{due_label}"
+  end
+
+  def ask? prompt
+    puts "#{prompt}? (y/n)"
+    answer = gets.chomp
+    case answer.downcase
+    when "y", "yes", "true", "ok", "okay"
+      true
+    when "n", "no", "false", "nope"
+      false
+    else
+      puts "Don't know what #{answer} means."
+      ask? prompt
     end
   end
 
@@ -27,7 +55,16 @@ class TodoManager
     # Add item
     puts "What do you need to do?"
     description = gets.chomp
-    item = { "description" => description, "done" => false }
+    yes = ask? "Do you want to set due date"
+    if yes
+      puts "When is this due?"
+      due_date = gets.chomp
+    end
+    item = {
+      "description" => description,
+      "done"        => false,
+      "due_at"      => due_date
+    }
     list.push item
   end
 
