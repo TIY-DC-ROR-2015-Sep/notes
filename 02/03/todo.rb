@@ -16,6 +16,14 @@ class TodoItem
     end
   end
 
+  def to_h
+    {
+      "description" => description,
+      "done"        => done,
+      "due_at"      => due_at
+    }
+  end
+
   def past_due?
     due_at && Date.today > due_at
   end
@@ -82,18 +90,23 @@ class TodoManager
       puts "When is this due?"
       due_date = gets.chomp
     end
-    item = {
+    item = TodoItem.new({
       "description" => description,
       "done"        => false,
       "due_at"      => due_date
-    }
+    })
     list.push item
   end
 
   def save_and_quit
-    File.write "database", list.to_json
+    write_all_data_to_file "database"
     puts "Have a nice day"
     exit
+  end
+
+  def write_all_data_to_file path
+    list_of_hashes = list.map { |item| item.to_h }
+    File.write path, list_of_hashes.to_json
   end
 
   def mark_item_complete
@@ -112,11 +125,7 @@ class TodoManager
 end
 
 list_of_hashes = JSON.parse File.read("database")
-list = []
-list_of_hashes.each do |h|
-  list.push TodoItem.new(h)
-end
-binding.pry
+list = list_of_hashes.map { |h| TodoItem.new(h) }
 tm = TodoManager.new list
 
 loop do
