@@ -5,11 +5,11 @@ class Analyzer
   def initialize corpus
     @letters_hash = {}
 
-    corpus.each_char do |c|
-      if @letters_hash[c] == nil
-        @letters_hash[c] = 0
-      end
-      @letters_hash[c] = @letters_hash[c] + 1
+    corpus.each_char do |ch|
+      # @letters_hash[ch] = @letters_hash[ch] || 0
+      # @letters_hash[ch] = @letters_hash[ch]  + 1
+      @letters_hash[ch] ||= 0
+      @letters_hash[ch]  += 1
     end
 
   end
@@ -22,6 +22,7 @@ end
 text = File.read "./words.txt"
 
 a = Analyzer.new text
+# binding.pry
 
 puts "There are #{a.count('e')} e's"
 puts "There are #{a.count('t')} t's"
