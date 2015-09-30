@@ -3,21 +3,19 @@ require 'pry'
 
 class Analyzer
   def initialize corpus
-    @letters_array = []
+    @letters_hash = {}
 
-    @alphabet = ('a'..'z').to_a
-    26.times { @letters_array.push 0 }
     corpus.each_char do |c|
-      i = @alphabet.index c
-      if i
-        @letters_array[i] += 1
+      if @letters_hash[c] == nil
+        @letters_hash[c] = 0
       end
+      @letters_hash[c] = @letters_hash[c] + 1
     end
+
   end
 
   def count letter
-    i = @alphabet.index letter
-    @letters_array[i]
+    @letters_hash[letter]
   end
 end
 
