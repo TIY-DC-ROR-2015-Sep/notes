@@ -2,6 +2,46 @@ require 'date'
 require 'pry'
 require 'json'
 
+class TodoItem
+  attr_reader :description, :done, :due_at
+
+  def initialize h
+    @description = h["description"]
+    @done        = h["done"]
+
+    if h["due_at"]
+      @due_at = Date.parse(h["due_at"])
+    else
+      @due_at = nil
+    end
+  end
+
+  def past_due?
+    due_at && Date.today > due_at
+  end
+
+  def bullet_icon
+    if done
+      "X"
+    elsif past_due?
+      "!"
+    else
+      "-"
+    end
+  end
+
+  def due_label
+    if due_at
+      "(#{due_at})"
+    else
+      ""
+    end
+  end
+
+  def format
+    "#{bullet_icon} #{description} #{due_label}"
+  end
+end
 
 class TodoManager
   attr_reader :list
@@ -15,26 +55,8 @@ class TodoManager
 
   def show_list
     list.each do |todo|
-      puts format_todo_item(todo)
+      puts todo.format
     end
-  end
-
-  def format_todo_item item
-    bullet_icon = if item["done"]
-      "X"
-    elsif item["due_at"] && Date.today > Date.parse(item["due_at"]) # past_due
-      "!"
-    else
-      "-"
-    end
-    description = item["description"]
-    due_label = if item["due_at"]
-      "(#{item['due_at']})"
-    else
-      ""
-    end
-
-    "#{bullet_icon} #{description} #{due_label}"
   end
 
   def ask? prompt
@@ -89,7 +111,12 @@ class TodoManager
   end
 end
 
-list = JSON.parse File.read("database")
+list_of_hashes = JSON.parse File.read("database")
+list = []
+list_of_hashes.each do |h|
+  list.push TodoItem.new(h)
+end
+binding.pry
 tm = TodoManager.new list
 
 loop do
