@@ -12,4 +12,11 @@ class BoardTest < Minitest::Test
     b.record_move :x, 5
     assert_equal :x, b.read(5)
   end
+
+  def test_overwriting
+    b = Board.new
+    b.record_move :o, 2
+    b.record_move :x, 2
+    assert_equal :o, b.read(2)
+  end
 end

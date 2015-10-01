@@ -11,6 +11,8 @@ class Board
   end
 
   def record_move letter, position
-    @state[position] = letter
+    if @state[position].is_a? Fixnum
+      @state[position] = letter
+    end
   end
 end
