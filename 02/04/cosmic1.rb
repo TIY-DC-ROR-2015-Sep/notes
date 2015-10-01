@@ -22,7 +22,7 @@ def works? w1, w2
 end
 
 def anagrams? w1, w2
-  w1.chars.sort == w2.chars.sort
+  w1 == w2.chars.sort
 end
 
 def chainable? w1, w2
@@ -32,8 +32,10 @@ end
 def find_pairs_from_list words
   counter = 0
   words.each do |fst|
+    sorted_fst = fst.chars.sort
+
     words.each do |snd|
-      if works?(fst, snd)
+      if works?(sorted_fst, snd)
         counter += 1
         puts [fst, snd]
       end
