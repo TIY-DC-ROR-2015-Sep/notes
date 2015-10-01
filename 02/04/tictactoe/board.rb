@@ -7,12 +7,22 @@ class Board
   end
 
   def read position
-    @state[position]
+    @state[position.to_i]
   end
 
   def record_move letter, position
-    if @state[position].is_a? Fixnum
-      @state[position] = letter
+    if @state[position.to_i].is_a? Fixnum
+      @state[position.to_i] = letter
+    end
+  end
+
+  def display
+    [
+      [1,2,3],
+      [4,5,6],
+      [7,8,9]
+    ].each do |row|
+      puts "#{@state[row[0]]} | #{@state[row[1]]} | #{@state[row[2]]}"
     end
   end
 
