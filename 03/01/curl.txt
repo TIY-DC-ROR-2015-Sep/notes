@@ -1,0 +1,16 @@
+  654  curl -H "Authorization: token 23de9ad8fde294046dfcf1ea4498bbbc28cebf27" https://api.github.com/users/jamesdabbs/repos
+  655  curl -H "Authorization: token 23de9ad8fde294046dfcf1ea4498bbbc28cebf27" https://api.github.com/user/repos
+  656  curl -H "Authorization: token 23de9ad8fde294046dfcf1ea4498bbbc28cebf27" https://api.github.com/user/tenderlove
+  657  curl -H "Authorization: token 23de9ad8fde294046dfcf1ea4498bbbc28cebf27" https://api.github.com/users/tenderlove
+  658  curl -H "Authorization: token 23de9ad8fde294046dfcf1ea4498bbbc28cebf27" https://api.github.com/user
+  659  curl -H "Authorization: token 23de9ad8fde294046dfcf1ea4498bbbc28cebf27" https://api.github.com/orgs/rails
+  660  curl -H "Authorization: token 23de9ad8fde294046dfcf1ea4498bbbc28cebf27" https://api.github.com/orgs/rails/repos/rails
+  661  curl -H "Authorization: token 23de9ad8fde294046dfcf1ea4498bbbc28cebf27" -XPATCH https://api.github.com/repos/TIY-DC-ROR-2015-Sep/notes
+  662  curl -H "Authorization: token 23de9ad8fde294046dfcf1ea4498bbbc28cebf27" -XPATCH https://api.github.com/repos/TIY-DC-ROR-2015-Sep/notes -d '{"description": "Trapped in command line, send help"}'
+  663  curl -i -H "Authorization: token 23de9ad8fde294046dfcf1ea4498bbbc28cebf27" -XPATCH https://api.github.com/repos/TIY-DC-ROR-2015-Sep/notes -d '{"description": "Trapped in command line, send help"}'
+  664  curl -i -H "Authorization: token 23de9ad8fde294046dfcf1ea4498bbbc28cebf27" -XPATCH https://api.github.com/repos/TIY-DC-ROR-2015-Sep/notes -d '{"description": "Trapped in command line, send help", "name": "notes"}'
+  665  curl -i -H "Authorization: token 23de9ad8fde294046dfcf1ea4498bbbc28cebf27" -XPATCH https://api.github.com/repos/TIY-DC-ROR-2015-Sep/notes -d '{"description": "Trapped in command line, send help", "name": "class-notes"}'
+  666  curl -i -H "Authorization: token 23de9ad8fde294046dfcf1ea4498bbbc28cebf27" -XPATCH https://api.github.com/repos/TIY-DC-ROR-2015-Sep/class-notes -d '{"description": "Trapped in command line, send help", "name": "notes"}'
+  667  curl -i -XPATCH https://api.github.com/repos/TIY-DC-ROR-2015-Sep/class-notes -d '{"description": "Trapped in command line, send help", "name": "notes"}'
+  668  curl -i -H "Authorization: token 23de9ad8fde294046dfcf1ea4498bbbc28cebf27" -XDELETE https://api.github.com/repos/TIY-DC-ROR-2015-Sep/notes
+  669  history
