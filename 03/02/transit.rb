@@ -3,6 +3,7 @@ require "httparty"
 require "haversine"
 
 require "./station"
+require "./bike_station"
 
 CLOSE_RADIUS = 1
 
@@ -13,13 +14,20 @@ CLOSE_RADIUS = 1
 lat  =  38.903192
 long = -77.039766
 
+bikes  = BikeStation.near(lat, long)
+metros = Station.near(lat, long)
 
-Station.near(lat, long).each do |station|
+all_stations = (bikes + metros).sort_by { |s| s.distance_to(lat, long) }
+all_stations.each do |station|
   title = "#{station.name} (#{station.distance_to(lat, long).round(2)} mi)"
   puts title
   puts "=" * title.length
-  station.upcoming_trains.each do |train|
-    puts " #{train["Car"]}\t#{train["Min"]}\t#{train["Destination"]}"
+
+  if station.respond_to? :upcoming_trains
+    station.upcoming_trains.each do |train|
+      puts " #{train["Car"]}\t#{train["Min"]}\t#{train["Destination"]}"
+    end
   end
+
   puts
 end
