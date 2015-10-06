@@ -1,6 +1,5 @@
 class Station
   include Locatable
-  extend Locatable::ClassMethods
 
   attr_reader :name
 

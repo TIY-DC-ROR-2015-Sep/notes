@@ -1,6 +1,5 @@
 class BikeStation
   include Locatable
-  extend Locatable::ClassMethods
 
   attr_reader :name
 
