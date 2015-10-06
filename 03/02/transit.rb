@@ -20,11 +20,8 @@ r = HTTParty.get(
 
 stations = r["Stations"].map { |h| Station.new(h) }
 
-close_stations = []
-stations.each do |station|
-  if station.distance_to(lat, long) < CLOSE_RADIUS
-    close_stations.push station
-  end
+close_stations = stations.select do |station|
+  station.distance_to(lat, long) < CLOSE_RADIUS
 end
 
 binding.pry
