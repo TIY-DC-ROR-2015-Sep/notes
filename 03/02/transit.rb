@@ -23,11 +23,6 @@ all_stations.each do |station|
   puts title
   puts "=" * title.length
 
-  if station.respond_to? :upcoming_trains
-    station.upcoming_trains.each do |train|
-      puts " #{train["Car"]}\t#{train["Min"]}\t#{train["Destination"]}"
-    end
-  end
-
+  puts station.extra_detail
   puts
 end

@@ -34,4 +34,10 @@ class Station
     end
     close_stations.sort_by { |s| s.distance_to(lat, long) }
   end
+
+  def extra_detail
+    upcoming_trains.map do |train|
+      " #{train["Car"]}\t#{train["Min"]}\t#{train["Destination"]}"
+    end
+  end
 end

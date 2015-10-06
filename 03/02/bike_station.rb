@@ -24,4 +24,8 @@ class BikeStation
     end
     close_stations.sort_by { |s| s.distance_to(lat, long) }
   end
+
+  def extra_detail
+    "#{@num_bikes} available, #{@num_docks} empty"
+  end
 end
