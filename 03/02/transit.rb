@@ -6,7 +6,7 @@ require "./station"
 
 CLOSE_RADIUS = 1
 
-puts "Where are you?"
+# puts "Where are you?"
 # lat  = gets.chomp
 # long = gets.chomp
 
@@ -24,9 +24,11 @@ close_stations = stations.select do |station|
   station.distance_to(lat, long) < CLOSE_RADIUS
 end
 
-close_stations.each do |station|
-  puts station.name
-  puts "=" * station.name.length
+sorted = close_stations.sort_by { |s| s.distance_to(lat, long) }
+sorted.each do |station|
+  title = "#{station.name} (#{station.distance_to(lat, long).round(2)} mi)"
+  puts title
+  puts "=" * title.length
   station.upcoming_trains.each do |train|
     puts " #{train["Car"]}\t#{train["Min"]}\t#{train["Destination"]}"
   end
