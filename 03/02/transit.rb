@@ -24,4 +24,11 @@ close_stations = stations.select do |station|
   station.distance_to(lat, long) < CLOSE_RADIUS
 end
 
-binding.pry
+close_stations.each do |station|
+  puts station.name
+  puts "=" * station.name.length
+  station.upcoming_trains.each do |train|
+    puts " #{train["Car"]}\t#{train["Min"]}\t#{train["Destination"]}"
+  end
+  puts
+end
