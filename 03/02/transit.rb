@@ -1,4 +1,5 @@
 require "pry"
+require "did_you_mean"
 require "httparty"
 require "haversine"
 
