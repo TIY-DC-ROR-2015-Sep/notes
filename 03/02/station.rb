@@ -20,7 +20,7 @@ class Station
     r["Trains"]
   end
 
-  def self.all
+  def self.all_stations
     r = HTTParty.get(
       "https://api.wmata.com/Rail.svc/json/jStations",
       headers: { "api_key" => "d311c928b8364eff80d7462f7938b2b1" }
@@ -29,7 +29,7 @@ class Station
   end
 
   def self.near lat, long
-    close_stations = all.select do |station|
+    close_stations = Station.all_stations.select do |station|
       station.distance_to(lat, long) < CLOSE_RADIUS
     end
     close_stations.sort_by { |s| s.distance_to(lat, long) }
