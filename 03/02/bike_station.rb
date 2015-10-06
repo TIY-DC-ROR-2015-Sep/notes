@@ -1,5 +1,6 @@
 class BikeStation
   include Locatable
+  extend Locatable::ClassMethods
 
   attr_reader :name
 
@@ -14,13 +15,6 @@ class BikeStation
   def self.all_stations
     r = HTTParty.get("http://www.capitalbikeshare.com/data/stations/bikeStations.xml")
     r["stations"]["station"].map { |h| BikeStation.new(h) }
-  end
-
-  def self.near lat, long
-    close_stations = BikeStation.all_stations.select do |station|
-      station.distance_to(lat, long) < CLOSE_RADIUS
-    end
-    close_stations.sort_by { |s| s.distance_to(lat, long) }
   end
 
   def extra_detail

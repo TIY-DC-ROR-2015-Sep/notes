@@ -1,5 +1,6 @@
 class Station
   include Locatable
+  extend Locatable::ClassMethods
 
   attr_reader :name
 
@@ -24,13 +25,6 @@ class Station
       headers: { "api_key" => "d311c928b8364eff80d7462f7938b2b1" }
     )
     r["Stations"].map { |h| Station.new(h) }
-  end
-
-  def self.near lat, long
-    close_stations = Station.all_stations.select do |station|
-      station.distance_to(lat, long) < CLOSE_RADIUS
-    end
-    close_stations.sort_by { |s| s.distance_to(lat, long) }
   end
 
   def extra_detail

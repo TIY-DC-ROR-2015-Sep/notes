@@ -14,7 +14,7 @@ CLOSE_RADIUS = 1
 
 lat  =  38.903192
 long = -77.039766
-
+binding.pry
 bikes  = BikeStation.near(lat, long)
 metros = Station.near(lat, long)
 
