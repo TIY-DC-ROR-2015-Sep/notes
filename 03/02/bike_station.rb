@@ -1,5 +1,7 @@
 class BikeStation
-  attr_reader :name, :lat, :long
+  include Locatable
+
+  attr_reader :name
 
   def initialize data_hash
     @name = data_hash["name"]
@@ -7,10 +9,6 @@ class BikeStation
     @long = data_hash["long"].to_f
     @num_bikes = data_hash["nbBikes"]
     @num_docks = data_hash["nbEmptyDocks"]
-  end
-
-  def distance_to other_lat, other_long
-    Haversine.distance(@lat, @long, other_lat, other_long).to_miles
   end
 
   def self.all_stations

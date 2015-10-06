@@ -1,15 +1,13 @@
 class Station
-  attr_reader :name, :lat, :long
+  include Locatable
+
+  attr_reader :name
 
   def initialize data_hash
     @name = data_hash["Name"]
     @lat  = data_hash["Lat"].to_f
     @long = data_hash["Lon"].to_f
     @code = data_hash["Code"]
-  end
-
-  def distance_to other_lat, other_long
-    Haversine.distance(@lat, @long, other_lat, other_long).to_miles
   end
 
   def upcoming_trains

@@ -2,6 +2,7 @@ require "pry"
 require "httparty"
 require "haversine"
 
+require "./locatable"
 require "./station"
 require "./bike_station"
 
