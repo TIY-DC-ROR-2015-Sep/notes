@@ -18,15 +18,11 @@ r = HTTParty.get(
   headers: { "api_key" => "d311c928b8364eff80d7462f7938b2b1" }
 )
 
-stations = []
-r["Stations"].each do |h|
-  stations.push Station.new(h)
-end
+stations = r["Stations"].map { |h| Station.new(h) }
 
 close_stations = []
 stations.each do |station|
-  d = Haversine.distance(lat, long, station.lat, station.long)
-  if d.to_miles < CLOSE_RADIUS
+  if station.distance_to(lat, long) < CLOSE_RADIUS
     close_stations.push station
   end
 end
