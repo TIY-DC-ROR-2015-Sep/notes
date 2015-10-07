@@ -35,6 +35,10 @@ class BetterServer < Sinatra::Base
     "That was a get"
   end
 
+  get "/say_hello" do
+    system "say", "hello"
+  end
+
   get "/echo/:phrase" do
     if params[:reverse]
       params[:phrase].reverse
