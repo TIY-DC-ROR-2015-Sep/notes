@@ -8,7 +8,14 @@ class BetterServer < Sinatra::Base
   get "/" do
     "Got GET request to / for BetterServer"
   end
+
+  post "/zxcv" do
+    "That was a post"
+  end
+
+  get "/zxcv" do
+    "That was a get"
+  end
 end
 
-binding.pry
 BetterServer.run!
