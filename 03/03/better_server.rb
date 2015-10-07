@@ -16,6 +16,14 @@ class BetterServer < Sinatra::Base
   get "/zxcv" do
     "That was a get"
   end
+
+  get "/echo/:phrase" do
+    if params[:reverse]
+      params[:phrase].reverse
+    else
+      params[:phrase]
+    end
+  end
 end
 
 BetterServer.run!
