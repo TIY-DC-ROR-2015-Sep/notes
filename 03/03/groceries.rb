@@ -26,6 +26,18 @@ class Groceries < Sinatra::Base
       "OK, added '#{name}'"
     end
   end
+
+  delete "/groceries" do
+    name = params[:name]
+    if List.include? name
+      List.delete name
+    else
+      status 404
+      body "`#{name}` is not in the list"
+    end
+  end
 end
 
-Groceries.run!
+if $PROGRAM_NAME == __FILE__
+  Groceries.run!
+end
