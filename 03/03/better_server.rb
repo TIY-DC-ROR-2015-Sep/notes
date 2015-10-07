@@ -2,6 +2,14 @@ require "sinatra/base"
 require "pry"
 
 class Dice
+  def self.big_roll num_of_dice, num_of_sides
+    d = Dice.new num_of_sides
+
+    sum = 0
+    num_of_dice.times { sum += d.roll }
+    sum
+  end
+
   def initialize sides
     @sides = sides.to_i
   end
@@ -39,11 +47,7 @@ class BetterServer < Sinatra::Base
     num = request.env["HTTP_X_NUM_DICE"] || 1
     max = params[:sides] || 6
 
-    sum = 0
-    num.to_i.times do
-      sum += rand(1 .. max.to_i)
-    end
-    sum.to_s
+    Dice.big_roll(num, max).to_s
   end
 end
 
