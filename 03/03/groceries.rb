@@ -5,6 +5,7 @@ require "pry"
 List = ["apples", "bananas", "carrots"]
 
 class Groceries < Sinatra::Base
+  set :bind, "0.0.0.0"
   set :logging, true
 
   get "/groceries" do
